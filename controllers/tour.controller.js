@@ -1,6 +1,13 @@
 const { query } = require("express");
 const Tour = require("../models/tour.model");
 
+exports.aliesTopTours = (req, res, next) => {
+  req.query.sort = "-ratingsAverage,price";
+  req.query.limit = 5;
+  req.query.fields = "name,duration,ratingsAverage,price";
+  next();
+};
+
 exports.getAllTours = async (req, res) => {
   try {
     // Build query
