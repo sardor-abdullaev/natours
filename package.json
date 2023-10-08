@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production nodemon server.js",
-    "delete-db":"node dev-data/data/import-dev-data.js --delete",
-    "import-db":"node dev-data/data/import-dev-data.js --import"
+    "delete-db": "node dev-data/data/import-dev-data.js --delete",
+    "import-db": "node dev-data/data/import-dev-data.js --import"
   },
   "author": "Sardor",
   "license": "ISC",
@@ -15,7 +15,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongoose": "^7.5.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
