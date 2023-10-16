@@ -7,7 +7,8 @@
     "start": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production nodemon server.js",
     "delete-db": "node dev-data/data/import-dev-data.js --delete",
-    "import-db": "node dev-data/data/import-dev-data.js --import"
+    "import-db": "node dev-data/data/import-dev-data.js --import",
+    "debug": "ndb server.js"
   },
   "author": "Sardor",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
+    "ndb": "^1.1.5",
     "nodemon": "^3.0.1"
   }
 }
