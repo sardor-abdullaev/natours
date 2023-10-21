@@ -41,6 +41,7 @@ app.all("*", (req, res, next) => {
 
 app.use((req, res, next) => {
   console.log("This function has been ignored!");
+  next();
 });
 
 app.use(globalErrorHandler);
