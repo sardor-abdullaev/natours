@@ -1,3 +1,4 @@
+const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 const User = require("./../models/user.model");
 const catchAsync = require("../utils/catchAsync");
@@ -45,4 +46,40 @@ exports.login = catchAsync(async (req, res, next) => {
   //   3) if everything ok, send token to client
   const token = signToken(user._id);
   res.status(200).json({ status: "success", token });
+});
+
+exports.protect = catchAsync(async (req, res, next) => {
+  // 1) Getting token and check of it's there
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  // console.log(token);
+
+  if (!token) {
+    return next(
+      new AppError("You are not logged in! Please log in to get access", 401)
+    );
+  }
+
+  // 2) ValVerification token
+  // jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  //   console.log(decoded);
+  // });
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  // 3) Check if user still exists
+  // TODO : Need to check
+  const freshUser = await User.findById(decoded.id);
+  if (!freshUser) {
+    return next(
+      new AppError("The user belonging to this token does no longer exist", 401)
+    );
+  }
+
+  // 4) Check if user changed password after the token was issued
+  next();
 });
