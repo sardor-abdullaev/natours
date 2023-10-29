@@ -51,7 +51,6 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
-  // next(new AppError("test",300));
   let token;
   if (
     req.headers.authorization &&
@@ -59,7 +58,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
-  // console.log(token);
 
   if (!token) {
     return next(
