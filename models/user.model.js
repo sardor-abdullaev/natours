@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, "Please provide valid email"],
   },
   photo: String,
+  role: {
+    type: String,
+    enum: ["user", "guide", "lead-guide", "admin"],
+    default: "user",
+  },
   password: {
     type: String,
     required: [true, "Please provide password"],
@@ -29,7 +34,7 @@ const userSchema = new mongoose.Schema({
       message: "Passwords are not the same",
     },
   },
-  passwordChangedAt: { type: Date, required: true },
+  passwordChangedAt: { type: Date, default: Date.now() },
 });
 
 userSchema.pre("save", async function (next) {
