@@ -90,12 +90,20 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
+    // child referencing
     guides: [
       {
         type: mongoose.Types.ObjectId,
         ref: "User",
       },
     ],
+    // child referencing
+    // reviews: [
+    //   {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "Review",
+    //   },
+    // ],
   },
 
   {
@@ -106,6 +114,13 @@ const tourSchema = new mongoose.Schema(
 
 tourSchema.virtual("durationWeeks").get(function () {
   return this.duration / 7;
+});
+
+// Virtual populate
+tourSchema.virtual("reviews", {
+  ref: "Review",
+  foreignField: "tour",
+  localField: "_id",
 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
