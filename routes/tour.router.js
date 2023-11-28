@@ -19,7 +19,7 @@ const router = express.Router();
 //     reviewController.createReview
 //   );
 
-router.use(":/tourId/reviews",reviewRouter)
+router.use("/:tourId/reviews",reviewRouter)
 
 router
   .route("/top-5-cheap")
