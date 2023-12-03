@@ -55,18 +55,18 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
 exports.createUser = (req, res) => {
+  const url = `${req.protocol}://${req.get(
+    "host"
+  )}/api/v1/users/signup`;
+
   res.status(500).json({
     status: "error",
-    message: "This route is not yet defined!",
+    message: `This route is not yet defined! Please use ${url} instead.`,
   });
 };
+
 // Do Not update passwords with this
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
+exports.getUser = factory.getOne(User);

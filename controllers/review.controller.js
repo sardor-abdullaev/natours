@@ -27,6 +27,7 @@ exports.setTourUserIds = (req, res, next) => {
 exports.createReview = factory.createOne(Review);
 exports.updateReview = factory.updateOne(Review);
 exports.deleteReview = factory.deleteOne(Review);
+exports.getReview = factory.getOne(Review);
 
 // exports.createReview = catchAsync(async (req, res, next) => {
 //   // allow nested routes
